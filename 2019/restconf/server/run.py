@@ -4,7 +4,7 @@ import textwrap
 app = Flask(__name__)
 
 @app.route('/.well-known/host-meta', methods=['GET'])
-def func():
+def serve_root_discoverty():
     msg = """\
             <XRD xmlns='http://docs.oasis-open.org/ns/xri/xrd-1.0'>
                 <Link rel='restconf' href='/restconf'/>
