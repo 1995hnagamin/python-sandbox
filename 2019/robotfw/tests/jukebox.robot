@@ -1,14 +1,14 @@
 *** Settings ***
 Library         Process
 Library         REST            http://localhost:8080
-Test Setup      Start server
+Test Setup      サーバーを起動する
 
 *** Keywords ***
-Start server
-        Start Process   pipenv    run   python  server/run.py   stdout=stdout.log       stderr=stderr.log
+サーバーを起動する
+        Start Process   pipenv      run     python      server/run.py   stdout=stdout.log   stderr=stderr.log
         Process Should Be Running
 
 *** Test Cases ***
-`/` returns 200
-        GET             /
-        Integer         response status         200
+`/` にアクセスすると200が返ってくる
+        GET         /
+        Integer     response status         200
