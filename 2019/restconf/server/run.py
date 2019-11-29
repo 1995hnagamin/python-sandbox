@@ -28,7 +28,8 @@ def show_yang_lib_version():
             <yang-library-version
               xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
               2016-06-21
-            </yang-library-version>"""
+            </yang-library-version>
+            """
     return textwrap.dedent(msg)
 
 
