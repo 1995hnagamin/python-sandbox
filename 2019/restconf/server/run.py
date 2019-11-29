@@ -12,6 +12,13 @@ def serve_root_discoverty():
             """
     return textwrap.dedent(msg)
 
+@app.route('/restconf/operations', methods=['GET'])
+def show_operations():
+    msg = """\
+            { "operations" : { "example-jukebox:play" : [null] } }
+            """
+    return textwrap.dedent(msg)
+
 if __name__ == "__main__":
     app.debug = True
     portnum = 8080
