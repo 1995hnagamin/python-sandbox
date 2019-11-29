@@ -1,1 +1,6 @@
 Pipfile.lock
+
+# Robot Framework
+*.log
+*.html
+*.xml
