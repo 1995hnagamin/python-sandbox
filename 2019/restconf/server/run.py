@@ -1,7 +1,7 @@
-from flask import Flask
+import flask
 import textwrap
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 
 @app.route("/.well-known/host-meta", methods=["GET"])
@@ -19,7 +19,7 @@ def show_operations():
     msg = """\
             { "operations" : { "example-jukebox:play" : [null] } }
             """
-    return textwrap.dedent(msg)
+    return flask.Response(textwrap.dedent(msg), mimetype="application/yang-data+json")
 
 
 if __name__ == "__main__":
