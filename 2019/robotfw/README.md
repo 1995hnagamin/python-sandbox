@@ -9,8 +9,7 @@ $ pipenv run python server/run.py
 
 ## Test
 ```
-$ cd tests
-$ pipenv run robot jukebox.robot
+$ pipenv run robot tests/jukebox.robot
 ```
 
 references:
