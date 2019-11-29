@@ -22,6 +22,16 @@ def show_operations():
     return flask.Response(textwrap.dedent(msg), mimetype="application/yang-data+json")
 
 
+@app.route("/restconf/yang-library-version", methods=["GET"])
+def show_yang_lib_version():
+    msg = """\
+            <yang-library-version
+              xmlns="urn:ietf:params:xml:ns:yang:ietf-restconf">
+              2016-06-21
+            </yang-library-version>"""
+    return textwrap.dedent(msg)
+
+
 if __name__ == "__main__":
     app.debug = True
     portnum = 8080
