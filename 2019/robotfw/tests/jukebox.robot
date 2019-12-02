@@ -9,6 +9,9 @@ Test Teardown   サーバーを停止する
     Start Process   pipenv      run     python      server/run.py   stdout=stdout.log   stderr=stderr.log
     Process Should Be Running
 
+サーバーを停止する
+    Terminate Process
+
 *** Test Cases ***
 `/` にアクセスすると200が返ってくる
     GET         /
