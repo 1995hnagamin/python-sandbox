@@ -7,8 +7,6 @@ install:
   - pipenv --venv
   - pipenv lock
   - pipenv install
-cache:
-  - virtualenv
 script:
   - pipenv run robot tests/jukebox.robot
 after_failure:
