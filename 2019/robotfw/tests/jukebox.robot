@@ -17,3 +17,7 @@ Suite Teardown   サーバーを停止する
 `/` にアクセスすると200が返ってくる
     GET         /
     Integer     response status     200
+
+`/images` にアクセスするとJSONが返ってくる
+    GET         /images
+    Integer     response status     200
