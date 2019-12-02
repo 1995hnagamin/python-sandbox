@@ -3,6 +3,8 @@ dist: bionic
 install:
   - cd 2019/robotfw
   - pip install pipenv
+  - export PIPENV_VENV_IN_PROJECT=true
+  - pipenv --venv
   - pipenv install
 script:
   - pipenv run robot tests/jukebox.robot
