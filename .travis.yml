@@ -3,8 +3,13 @@ dist: bionic
 install:
   - cd 2019/robotfw
   - pip install pipenv
+  - export PIPENV_IGNORE_VIRTUALENVS=1
+  - export PIPENV_VENV_IN_PROJECT=true
   - pipenv lock
+  - pipenv --venv
   - pipenv install
+cache:
+  - $TRAVIS_BUILD_DIR/2019/robotfw/.venv
 script:
   - pipenv run robot tests/jukebox.robot
 after_failure:
