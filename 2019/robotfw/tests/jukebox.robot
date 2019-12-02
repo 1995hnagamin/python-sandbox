@@ -16,4 +16,4 @@ Suite Teardown   サーバーを停止する
 *** Test Cases ***
 `/` にアクセスすると200が返ってくる
     GET         /
-    Integer     response status         200
+    Integer     response status     200
