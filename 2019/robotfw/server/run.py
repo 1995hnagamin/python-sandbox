@@ -1,4 +1,5 @@
 import flask
+import json
 import os
 import textwrap
 
@@ -11,6 +12,17 @@ def index():
             Hello
             """
     return textwrap.dedent(msg)
+
+
+def image_info(img_id):
+    return {"image_id": img_id}
+
+
+@app.route("/images", methods=["GET"])
+def show_image_list():
+    return json.dumps(
+        [image_info(os.path.splitext(p)[0]) for p in os.listdir("data/img")]
+    )
 
 
 if __name__ == "__main__":
