@@ -5,6 +5,7 @@ install:
   - pip install pipenv
   - export PIPENV_VENV_IN_PROJECT=true
   - pipenv --venv
+  - pipenv lock
   - pipenv install
 cache:
   - virtualenv
