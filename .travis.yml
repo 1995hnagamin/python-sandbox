@@ -3,7 +3,7 @@ dist: bionic
 install:
   - cd 2019/robotfw
   - pip install pipenv
-  - export IGNORE_VIRTUALENVS=true
+  - export PIPENV_IGNORE_VIRTUALENVS=1
   - export PIPENV_VENV_IN_PROJECT=true
   - pipenv --venv
   - pipenv lock
