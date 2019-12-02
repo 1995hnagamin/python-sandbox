@@ -6,6 +6,8 @@ install:
   - export PIPENV_VENV_IN_PROJECT=true
   - pipenv --venv
   - pipenv install
+cache:
+  - virtualenv
 script:
   - pipenv run robot tests/jukebox.robot
 after_failure:
