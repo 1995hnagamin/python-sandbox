@@ -33,6 +33,7 @@ Test Setup      テストサーバー用のセッションを作成する
     ${files}=   Create Dictionary   image=${file_data}
     ${resp}=    Post Request    server  /upload     files=${files}
     Should Be Equal As Strings  ${resp.status_code}     200
+    Log     Response is ${resp.content}     formatter=repr
     ${result}=  To Json     ${resp.content}
     Should Be Equal As Strings   ${result['status']}     ok
     Dictionary Should Contain Key     ${result}     image_id
