@@ -41,7 +41,7 @@ ${wrong_password}   wrongpassword
 誤ったパスワードで `/images` にアクセスすることはできない
     [Setup]     パスワードを間違える
     ${resp}=    Get Request     server  /images
-    Should Be Equal As Strings  ${resp.status_code}     403
+    Should Be Equal As Strings  ${resp.status_code}     401
 
 `/upload` でファイルをアップロードできる
     ${file_data}=   Get Binary File     ${CURDIR}${/}earth.jpg
