@@ -25,6 +25,10 @@ ${wrong_password}   wrongpassword
     ${user}=  Create List     ${username}   ${password}
     Create Session  server  http://localhost:8080   auth=${user}
 
+パスワードを間違える
+    ${user}=  Create List     ${username}   ${wrong_password}
+    Create Session  server  http://localhost:8080   auth=${user}
+
 *** Test Cases ***
 `/` にアクセスすると200が返ってくる
     ${resp}=    Get Request     server  /
@@ -33,6 +37,11 @@ ${wrong_password}   wrongpassword
 `/images` にアクセスするとJSONが返ってくる
     ${resp}=    Get Request     server  /images
     Should Be Equal As Strings  ${resp.status_code}     200
+
+誤ったパスワードで `/images` にアクセスすることはできない
+    [Setup]     パスワードを間違える
+    ${resp}=    Get Request     server  /images
+    Should Be Equal As Strings  ${resp.status_code}     403
 
 `/upload` でファイルをアップロードできる
     ${file_data}=   Get Binary File     ${CURDIR}${/}earth.jpg
