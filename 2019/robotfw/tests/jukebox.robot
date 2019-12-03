@@ -29,6 +29,12 @@ ${wrong_password}   wrongpassword
     ${user}=  Create List     ${username}   ${wrong_password}
     Create Session  server  http://localhost:8080   auth=${user}
 
+earth.jpg をアップロードする
+    ${file_data}=   Get Binary File     ${CURDIR}${/}earth.jpg
+    ${files}=   Create Dictionary   image=${file_data}
+    ${resp}=    Post Request    server  /upload     files=${files}
+    Return From Keyword     ${resp}
+
 *** Test Cases ***
 `/` にアクセスすると200が返ってくる
     ${resp}=    Get Request     server  /
@@ -44,11 +50,18 @@ ${wrong_password}   wrongpassword
     Should Be Equal As Strings  ${resp.status_code}     401
 
 `/upload` でファイルをアップロードできる
-    ${file_data}=   Get Binary File     ${CURDIR}${/}earth.jpg
-    ${files}=   Create Dictionary   image=${file_data}
-    ${resp}=    Post Request    server  /upload     files=${files}
+    ${resp}=    earth.jpg をアップロードする
     Should Be Equal As Strings  ${resp.status_code}     200
     Log     Response is ${resp.content}     formatter=repr
     ${result}=  To Json     ${resp.content}
     Should Be Equal As Strings   ${result['status']}     ok
     Dictionary Should Contain Key     ${result}     image_id
+
+`/upload` でアップロードした画像は `/images` からアクセスできる
+    ${resp}=    earth.jpg をアップロードする
+    Should Be Equal As Strings  ${resp.status_code}     200
+    ${result}=  To Json     ${resp.content}
+    Should Be Equal As Strings  ${result['status']}     ok
+    Dictionary Should Contain Key     ${result}     image_id
+    ${resp}=    Get Request     server  /raw/${result['image_id']}
+    Should Be Equal As Strings  ${resp.status_code}     200
