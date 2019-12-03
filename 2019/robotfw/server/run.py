@@ -1,10 +1,22 @@
 import flask
+from flask_httpauth import HTTPBasicAuth
 import json
 import os
 import textwrap
 import uuid
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = flask.Flask(__name__)
+
+auth = HTTPBasicAuth()
+users = {"janedoe": generate_password_hash("p4ssw0rd")}
+
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users:
+        return check_password_hash(users.get(username), password)
+    return False
 
 
 @app.route("/", methods=["GET"])
@@ -20,6 +32,7 @@ def image_info(img_id):
 
 
 @app.route("/images", methods=["GET"])
+@auth.login_required
 def show_image_list():
     return json.dumps(
         [image_info(os.path.splitext(p)[0]) for p in os.listdir("data/img")]
@@ -27,6 +40,7 @@ def show_image_list():
 
 
 @app.route("/upload", methods=["POST"])
+@auth.login_required
 def receive_image():
     if "image" not in flask.request.files:
         return json.dumps({"status": "error", "message": "image missing."})
