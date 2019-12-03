@@ -1,5 +1,7 @@
 Pipfile.lock
 
+data/
+
 # Robot Framework
 *.log
 *.html
