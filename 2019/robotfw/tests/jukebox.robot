@@ -7,6 +7,11 @@ Suite Setup     サーバーを起動する
 Suite Teardown  サーバーを停止する
 Test Setup      テストサーバー用のセッションを作成する
 
+*** Variables ***
+${username}         janedoe
+${password}         p4ssw0rd
+${wrong_password}   wrongpassword
+
 *** Keywords ***
 サーバーを起動する
     Start Process   pipenv  run     python  server/run.py   stdout=stdout.log   stderr=stderr.log
@@ -17,7 +22,8 @@ Test Setup      テストサーバー用のセッションを作成する
     Terminate Process
 
 テストサーバー用のセッションを作成する
-    Create Session  server  http://localhost:8080
+    ${user}=  Create List     ${username}   ${password}
+    Create Session  server  http://localhost:8080   auth=${user}
 
 *** Test Cases ***
 `/` にアクセスすると200が返ってくる
