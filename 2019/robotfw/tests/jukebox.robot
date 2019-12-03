@@ -1,8 +1,8 @@
 *** Settings ***
 Library         Process
 Library         RequestsLibrary
-Suite Setup      サーバーを起動する
-Suite Teardown   サーバーを停止する
+Suite Setup     サーバーを起動する
+Suite Teardown  サーバーを停止する
 
 *** Keywords ***
 サーバーを起動する
