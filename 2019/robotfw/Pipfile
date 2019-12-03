@@ -8,7 +8,7 @@ verify_ssl = true
 [packages]
 flask = "*"
 robotframework = "*"
-restinstance = "*"
+robotframework-requests = "*"
 
 [requires]
 python_version = "3.6"

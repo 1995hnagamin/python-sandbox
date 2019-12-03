@@ -1,6 +1,6 @@
 *** Settings ***
 Library         Process
-Library         REST            http://localhost:8080
+Library         RequestsLibrary
 Suite Setup      サーバーを起動する
 Suite Teardown   サーバーを停止する
 
@@ -15,9 +15,11 @@ Suite Teardown   サーバーを停止する
 
 *** Test Cases ***
 `/` にアクセスすると200が返ってくる
-    GET         /
-    Integer     response status     200
+    Create Session              server                  http://localhost:8080
+    ${resp}=                    Get Request             server                  /
+    Should Be Equal As Strings  ${resp.status_code}     200
 
 `/images` にアクセスするとJSONが返ってくる
-    GET         /images
-    Integer     response status     200
+    Create Session              server                  http://localhost:8080
+    ${resp}=                    Get Request             server                  /images
+    Should Be Equal As Strings  ${resp.status_code}     200
