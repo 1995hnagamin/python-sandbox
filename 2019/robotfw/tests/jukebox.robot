@@ -1,4 +1,5 @@
 *** Settings ***
+Library         OperatingSystem
 Library         Process
 Library         RequestsLibrary
 Suite Setup     サーバーを起動する
@@ -24,4 +25,10 @@ Test Setup      テストサーバー用のセッションを作成する
 
 `/images` にアクセスするとJSONが返ってくる
     ${resp}=    Get Request     server  /images
+    Should Be Equal As Strings  ${resp.status_code}     200
+
+`/upload` でファイルをアップロードできる
+    ${file_data}=   Get Binary File     ${CURDIR}${/}earth.jpg
+    ${files}=   Create Dictionary   image=${file_data}
+    ${resp}=    Post Request    server  /upload     files=${files}
     Should Be Equal As Strings  ${resp.status_code}     200
