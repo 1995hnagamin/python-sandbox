@@ -43,7 +43,7 @@ def show_image_list():
 @app.route("/raw/<img_id>")
 def deliver_image(img_id=None):
     if not img_id:
-        flask.abort(421)
+        flask.abort(400)
     path = os.path.abspath("data/img/{}".format(img_id))
     if not os.path.isfile(path):
         flask.abort(404)
