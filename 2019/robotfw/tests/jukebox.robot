@@ -57,7 +57,7 @@ earth.jpg をアップロードする
     Should Be Equal As Strings   ${result['status']}     ok
     Dictionary Should Contain Key     ${result}     image_id
 
-`/upload` でアップロードした画像は `/images` からアクセスできる
+`/upload` でアップロードした画像は `/raw` からアクセスできる
     ${resp}=    earth.jpg をアップロードする
     Should Be Equal As Strings  ${resp.status_code}     200
     ${result}=  To Json     ${resp.content}
