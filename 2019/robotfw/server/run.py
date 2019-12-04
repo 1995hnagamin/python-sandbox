@@ -1,5 +1,6 @@
 import flask
 from flask_httpauth import HTTPBasicAuth
+import imghdr
 import json
 import os
 import textwrap
@@ -37,6 +38,17 @@ def show_image_list():
     return json.dumps(
         [image_info(os.path.splitext(p)[0]) for p in os.listdir("data/img")]
     )
+
+
+@app.route("/raw/<img_id>")
+def deliver_image(img_id=None):
+    if not img_id:
+        flask.abort(421)
+    path = os.path.abspath("data/img/{}".format(img_id))
+    if not os.path.isfile(path):
+        flask.abort(404)
+    filetype = imghdr.what(path)
+    return flask.send_file(path, mimetype="image/{}".format(filetype))
 
 
 @app.route("/upload", methods=["POST"])
