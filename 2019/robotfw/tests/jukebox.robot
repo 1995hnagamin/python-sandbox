@@ -22,11 +22,8 @@ ${wrong_password}   wrongpassword
     Terminate Process
 
 テストサーバー用のセッションを作成する
-    ${user}=  Create List     ${username}   ${password}
-    Create Session  server  http://localhost:8080   auth=${user}
-
-パスワードを間違える
-    ${user}=  Create List     ${username}   ${wrong_password}
+    [Arguments]     ${uname}=${username}    ${pass}=${password}
+    ${user}=  Create List     ${uname}   ${pass}
     Create Session  server  http://localhost:8080   auth=${user}
 
 earth.jpg をアップロードする
@@ -45,7 +42,7 @@ earth.jpg をアップロードする
     Should Be Equal As Strings  ${resp.status_code}     200
 
 誤ったパスワードで `/images` にアクセスすることはできない
-    [Setup]     パスワードを間違える
+    [Setup]     テストサーバー用のセッションを作成する  pass=${wrong_password}
     ${resp}=    Get Request     server  /images
     Should Be Equal As Strings  ${resp.status_code}     401
 
