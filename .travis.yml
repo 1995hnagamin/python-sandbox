@@ -11,7 +11,7 @@ install:
 cache:
   - $TRAVIS_BUILD_DIR/2019/robotfw/.venv
 script:
-  - pipenv run robot tests/jukebox.robot
+  - pipenv run robot -V tests/preferences.py tests/jukebox.robot
 after_failure:
   - cat stdout.log
   - cat stderr.log
