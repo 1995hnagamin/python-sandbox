@@ -13,12 +13,12 @@ ${password}         p4ssw0rd
 ${wrong_password}   wrongpassword
 
 *** Keywords ***
-サーバーを起動する
+Start Server
     Start Process   pipenv  run     python  server/run.py   stdout=stdout.log   stderr=stderr.log
     Process Should Be Running
     Sleep   3s
 
-サーバーを停止する
+Stop Server
     Terminate Process
 
 テストサーバー用のセッションを作成する
