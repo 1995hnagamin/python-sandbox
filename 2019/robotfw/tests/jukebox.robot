@@ -3,8 +3,8 @@ Library         Collections
 Library         OperatingSystem
 Library         Process
 Library         RequestsLibrary
-Suite Setup     サーバーを起動する
-Suite Teardown  サーバーを停止する
+Suite Setup     ${START}
+Suite Teardown  ${STOP}
 Test Setup      テストサーバー用のセッションを作成する
 
 *** Variables ***
