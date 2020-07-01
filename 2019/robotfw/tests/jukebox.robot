@@ -3,8 +3,8 @@ Library         Collections
 Library         OperatingSystem
 Library         Process
 Library         RequestsLibrary
-Suite Setup     サーバーを起動する
-Suite Teardown  サーバーを停止する
+Suite Setup     ${START}
+Suite Teardown  ${STOP}
 Test Setup      テストサーバー用のセッションを作成する
 
 *** Variables ***
@@ -13,12 +13,12 @@ ${password}         p4ssw0rd
 ${wrong_password}   wrongpassword
 
 *** Keywords ***
-サーバーを起動する
+Start Server
     Start Process   pipenv  run     python  server/run.py   stdout=stdout.log   stderr=stderr.log
     Process Should Be Running
     Sleep   3s
 
-サーバーを停止する
+Stop Server
     Terminate Process
 
 テストサーバー用のセッションを作成する
